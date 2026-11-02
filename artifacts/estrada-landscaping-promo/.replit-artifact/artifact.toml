@@ -1,0 +1,29 @@
+kind = "video"
+videoAspectRatio = "16:9"
+previewPath = "/estrada-landscaping-promo/"
+title = "Estrada Landscaping Promo"
+description = "A short animated promotional film for Estrada Landscaping Professional Inc., sharing its landscaping and hardscaping services, Coatesville service area, and contact details."
+version = "1.0.0"
+id = "artifacts/estrada-landscaping-promo"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/estrada-landscaping-promo/" ]
+localPort = 22359
+
+[services.development]
+run = "pnpm --filter @workspace/estrada-landscaping-promo run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/estrada-landscaping-promo", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/estrada-landscaping-promo/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22359"
+BASE_PATH = "/estrada-landscaping-promo/"

@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Estrada Landscaping"
+description = "A professional landscaping company website for Estrada Landscaping Professional Inc., featuring its services, project gallery, company information, contact details, and direct WhatsApp chat."
+version = "1.0.0"
+id = "artifacts/estrada-landscaping"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21102
+
+[services.development]
+run = "pnpm --filter @workspace/estrada-landscaping run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/estrada-landscaping", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/estrada-landscaping/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21102"
+BASE_PATH = "/"
